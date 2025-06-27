@@ -1,1 +1,19 @@
 /* This is the main style file */
+
+svg {
+  background: #111;
+}
+.node {
+  fill: #4fc3f7;
+  stroke: black;
+}
+.edge {
+  stroke: #ccc;
+  stroke-width: 2;
+}
+text {
+  fill: white;
+  font-size: 14px;
+  text-anchor: middle;
+  pointer-events: none;
+}
