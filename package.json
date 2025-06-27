@@ -1,0 +1,27 @@
+{
+  "name": "theweb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "graph.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zekaroni/TheWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Zekaroni/TheWeb/issues"
+  },
+  "homepage": "https://github.com/Zekaroni/TheWeb#readme",
+  "scripts": {
+  "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
