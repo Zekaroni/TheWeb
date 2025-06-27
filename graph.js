@@ -2,19 +2,19 @@
 
 // Simple graph using adjacency list
 function Graph() {
-    this.adj = {};
-    this.pos = {};
+    this.adjacent = {};
+    this.position = {};
 }
 
-Graph.prototype.addVertex = function(v) {
-    if (!this.adj[v]) this.adj[v] = [];
+Graph.prototype.addVertex = function(vertex) {
+    if (!this.adjacent[vertex]) this.adjacent[vertex] = [];
 };
 
-Graph.prototype.addEdge = function(v, w) {
-    if (!this.adj[v]) this.addVertex(v);
-    if (!this.adj[w]) this.addVertex(w);
-    if (!this.adj[v].includes(w)) this.adj[v].push(w);
-    if (!this.adj[w].includes(v)) this.adj[w].push(v);
+Graph.prototype.addEdge = function(vertex, edge) {
+    if (!this.adjacent[vertex]) this.addVertex(vertex);
+    if (!this.adjacent[edge]) this.addVertex(edge);
+    if (!this.adjacent[vertex].includes(edge)) this.adjacent[vertex].push(edge);
+    if (!this.adjacent[edge].includes(vertex)) this.adjacent[edge].push(vertex);
 };
 
 Graph.prototype.draw = function() {
@@ -24,17 +24,17 @@ Graph.prototype.draw = function() {
         return;
     }
 
-    const keys = Object.keys(this.adj);
+    const keys = Object.keys(this.adjacent);
     const cx = 400;
     const cy = 300;
-    const r = 200;
+    const radius = 200;
 
     // calculate positions
     keys.forEach((node, i) => {
         const angle = (2 * Math.PI * i) / keys.length;
-        const x = cx + r * Math.cos(angle);
-        const y = cy + r * Math.sin(angle);
-        this.pos[node] = { x, y };
+        const x = cx + radius * Math.cos(angle);
+        const y = cy + radius * Math.sin(angle);
+        this.position[node] = { x, y };
     });
 
     let svgContent = "";
@@ -42,12 +42,12 @@ Graph.prototype.draw = function() {
 
     // edges
     keys.forEach((node) => {
-        this.adj[node].forEach((neighbor) => {
+        this.adjacent[node].forEach((neighbor) => {
             const edgeKey = [node, neighbor].sort().join("-");
             if (!drawnEdges.has(edgeKey)) {
                 drawnEdges.add(edgeKey);
-                const { x: x1, y: y1 } = this.pos[node];
-                const { x: x2, y: y2 } = this.pos[neighbor];
+                const { x: x1, y: y1 } = this.position[node];
+                const { x: x2, y: y2 } = this.position[neighbor];
                 svgContent += `<line class="edge" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`;
             }
         });
@@ -55,7 +55,7 @@ Graph.prototype.draw = function() {
 
     // nodes
     keys.forEach((node) => {
-        const { x, y } = this.pos[node];
+        const { x, y } = this.position[node];
         svgContent += `<circle class="node" cx="${x}" cy="${y}" r="20" />`;
         svgContent += `<text x="${x}" y="${y + 5}">${node}</text>`;
     });
@@ -64,12 +64,13 @@ Graph.prototype.draw = function() {
 };
 
 // Example usage
-const g = new Graph();
-g.addVertex("A");
-g.addVertex("B");
-g.addVertex("C");
-g.addVertex("D");
-g.addEdge("A", "B");
-g.addEdge("A", "C");
-g.addEdge("B", "D");
-g.draw();
+const graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addEdge("A", "B");
+graph.addEdge("A", "C");
+graph.addEdge("B", "D");
+graph.addEdge("A", "D");
+graph.draw();
